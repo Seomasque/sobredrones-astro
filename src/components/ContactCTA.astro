@@ -6,10 +6,19 @@
     <div class="contact-map">
       <iframe
         title="Sobredrones — Málaga y Costa del Sol"
-        src="https://www.google.com/maps?q=M%C3%A1laga,Espa%C3%B1a&z=11&output=embed"
+        src="https://www.google.com/maps?q=36.5852582,-4.8076486&z=15&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
+      <a
+        href="https://www.google.com/maps/place/Sobredrones+-+Empresa+de+Servicios+con+Drones+en+Marbella,+M%C3%A1laga+y+la+Costa+del+Sol./@36.5853539,-5.1379789,10z/data=!4m6!3m5!1s0x2a46d3fedbc86f3f:0x627b61c220722644!8m2!3d36.5852582!4d-4.8076486!16s%2Fg%2F11yfdq1sh_"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="map-link"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Ver en Google Maps
+      </a>
     </div>
 
     <div class="contact-form-col">
@@ -66,6 +75,18 @@
     border-radius: 6px;
   }
   .contact-map iframe { border: 0; width: 100%; height: 100%; min-height: 440px; display: block; }
+  .map-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--colorMain);
+    margin-top: 10px;
+    text-decoration: none;
+    width: fit-content;
+  }
+  .map-link:hover { color: var(--colorMainDark); }
   .contact-form-col { flex: 1 1 420px; min-width: 300px; }
   .contact-eyebrow {
     color: var(--colorMainDark); font-size: 14px; text-transform: uppercase;
