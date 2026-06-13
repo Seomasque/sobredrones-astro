@@ -1,0 +1,95 @@
+---
+// Bloque FAQ optimizado para GEO (AI Overviews, ChatGPT, Perplexity): cada respuesta
+// empieza con la afirmación factual y autocontenida. El schema FAQPage se inyecta abajo.
+const faqs = [
+  {
+    q: "¿Qué servicios de drones ofrece Sobredrones en Málaga?",
+    a: "Sobredrones ofrece filmación y fotografía aérea, vídeo para inmobiliarias, cobertura de eventos y bodas, espectáculos con enjambre de drones e inspecciones técnicas en Málaga, Marbella y toda la Costa del Sol.",
+  },
+  {
+    q: "¿Necesito un permiso para grabar con dron en la Costa del Sol?",
+    a: "Sí. En España el uso profesional de drones está regulado por la Agencia Española de Seguridad Aérea (AESA). Sobredrones es una operadora certificada por AESA y gestiona todos los permisos y la documentación necesaria para cada proyecto.",
+  },
+  {
+    q: "¿Cuánto cuesta contratar un vídeo o fotografía con dron?",
+    a: "El precio depende del tipo de proyecto, la duración y la localización. Sobredrones prepara un presupuesto a medida y sin compromiso; puedes solicitarlo por teléfono, email o desde el formulario de contacto.",
+  },
+  {
+    q: "¿En qué zonas trabaja Sobredrones?",
+    a: "Sobredrones presta servicio en toda la Costa del Sol, incluyendo Málaga capital, Marbella y los municipios de la costa. Para localizaciones especiales, consúltanos sin compromiso.",
+  },
+  {
+    q: "¿Cuánta experiencia tiene Sobredrones?",
+    a: "Sobredrones es una operadora de Málaga con más de 10 años de experiencia en grabación y fotografía aérea con drones, con pilotos certificados y una fuerte presencia en redes sociales.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<section id="faq" class="faq">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h-bold">Preguntas frecuentes</h2>
+      <p class="h-light">Todo lo que necesitas saber</p>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>
+            <span>{f.q}</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="faq-answer">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+
+<style>
+  .faq { background-color: #ffffff; padding: 100px 0; }
+  .faq .container { max-width: 860px; }
+  .faq-list { display: flex; flex-direction: column; gap: 14px; }
+  .faq-item {
+    border: 1px solid var(--colorBorder);
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .faq-item[open] { border-color: var(--colorMain); }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--colorDark);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-chevron { flex-shrink: 0; color: var(--colorMain); transition: transform 0.2s ease; }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-answer {
+    padding: 0 22px 22px;
+    margin: 0;
+    font-size: 15px;
+    color: var(--colorFont);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+</style>

@@ -1,0 +1,230 @@
+/* Self-hosted variable fonts (display: swap baked in by fontsource) */
+@import "@fontsource-variable/hanken-grotesk";       /* cuerpo */
+@import "@fontsource-variable/bricolage-grotesque";  /* titulares */
+
+:root {
+  /* Sobredrones brand palette — "Land & Sea" (muestreada del sitio real) */
+  --colorMain: #457b9d;        /* azul principal */
+  --colorMainDark: #1d3557;    /* hover / azul profundo */
+  --colorNavy: #1d3557;        /* secciones oscuras + footer */
+  --colorSky: #a8dadc;         /* azul claro */
+  --colorSkySoft: #e8f4f4;     /* círculos de icono / fondos muy claros */
+  --colorAccentCyan: #7ef7f5;  /* destello sobre oscuro (uso mínimo) */
+  --colorDark: #1d1e20;        /* titulares / texto fuerte */
+  --colorFont: #56585e;        /* texto cuerpo */
+  --colorLight: #ffffff;
+  --colorGrey: #eef4f8;        /* fondos de sección claros (azul-gris frío) */
+  --colorBorder: #d7e3e4;
+  --colorSuccess: #1a9e5c;
+  --colorError: #d64545;
+  --colorMainRGB: 69, 123, 157;
+  --colorNavyRGB: 29, 53, 87;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Hanken Grotesk Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--colorFont);
+  line-height: 1.7;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Bricolage Grotesque Variable", "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  color: var(--colorDark);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--colorFont);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+a:hover { color: var(--colorMain); }
+
+/* Foco visible de marca para teclado (accesibilidad) */
+:focus-visible {
+  outline: 2px solid var(--colorMain);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* <picture> no debe alterar el layout: el <img> participa directamente */
+picture { display: contents; }
+
+/* Shared layout container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Section heading pair: bold line + light line */
+.section-head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-head .h-bold {
+  font-size: 2.5rem;
+  color: var(--colorDark);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 2px 0;
+}
+.section-head .h-light {
+  font-size: 2.5rem;
+  color: var(--colorDark);
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0;
+}
+.section-head.on-dark .h-bold,
+.section-head.on-dark .h-light { color: #ffffff; }
+
+/* Buttons — azul con texto BLANCO (clave del recoloreo) */
+.btn {
+  display: inline-block;
+  font-size: 16px;
+  padding: 12px 35px;
+  min-width: 150px;
+  border-radius: 4px;
+  border: 2px solid var(--colorMain);
+  background-color: var(--colorMain);
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.btn:hover {
+  background-color: var(--colorMainDark);
+  border-color: var(--colorMainDark);
+  color: #ffffff;
+}
+.btn-outline {
+  display: inline-block;
+  font-size: 16px;
+  padding: 12px 35px;
+  min-width: 150px;
+  border-radius: 4px;
+  border: 2px solid var(--colorMain);
+  background-color: transparent;
+  color: var(--colorMain);
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.btn-outline:hover {
+  background-color: var(--colorMain);
+  color: #ffffff;
+}
+
+/* Responsive heading scale */
+@media (max-width: 991px) {
+  .section-head .h-bold,
+  .section-head .h-light { font-size: 2.1rem; }
+}
+@media (max-width: 575px) {
+  .section-head .h-bold,
+  .section-head .h-light { font-size: 1.8rem; }
+}
+
+/* Animations */
+@keyframes sd-fadeIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); }
+  80% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes sd-pulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(69, 123, 157, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(69, 123, 157, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(69, 123, 157, 0); }
+}
+
+.animated {
+  animation-fill-mode: both;
+  animation-duration: 1s;
+}
+.anim-fadeIn { animation-name: sd-fadeIn; }
+.anim-pulse { animation: sd-pulse 1.6s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s ease infinite; }
+
+/* Borde animado del título del hero (recorre el rectángulo) */
+@property --hero-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes hero-border-spin {
+  to { --hero-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animated,
+  .anim-fadeIn,
+  .anim-pulse,
+  .animate-pulse-ring,
+  .hero-bold::before {
+    animation: none !important;
+  }
+}
+
+/* ---- Reveal on scroll (mejora progresiva) ----
+   Solo se oculta el contenido si el JS añade .js-reveal al <html> y el usuario
+   no pide menos movimiento. Sin JS o con reduced-motion, todo se ve normal. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js-reveal :is(
+    .section-head, .about-text, .about-media, .why-intro, .why-item, .service-card,
+    .hiw-step, .gallery-card, .testimonial-card, .faq-item, .brands .brand,
+    .contact-form-col, .contact-map
+  ) {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  html.js-reveal :is(
+    .section-head, .about-text, .about-media, .why-intro, .why-item, .service-card,
+    .hiw-step, .gallery-card, .testimonial-card, .faq-item, .brands .brand,
+    .contact-form-col, .contact-map
+  ).in {
+    opacity: 1;
+    transform: none;
+  }
+}

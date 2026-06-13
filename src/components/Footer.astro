@@ -1,0 +1,125 @@
+---
+const usefulLinks = [
+  { label: "Sobre nosotros", href: "#sobre-nosotros" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "¿Por qué elegirnos?", href: "#por-que-elegirnos" },
+  { label: "Cómo trabajamos", href: "#como-trabajamos" },
+  { label: "Galería", href: "#galeria" },
+  { label: "Preguntas frecuentes", href: "#faq" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const services = [
+  "Filmación aérea",
+  "Fotografía aérea",
+  "Inmobiliarias",
+  "Eventos y bodas",
+  "Espectáculos con enjambre de drones",
+  "Inspecciones y renders",
+];
+
+const socialLinks = [
+  { label: "Facebook", href: "https://www.facebook.com/sobredrones" },
+  { label: "Instagram", href: "https://www.instagram.com/sobredrones" },
+  { label: "TikTok", href: "https://www.tiktok.com/@sobredrones" },
+  { label: "YouTube", href: "https://www.youtube.com/@sobredrones" },
+];
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="/images/logo-sobredrones.png" alt="Sobredrones" width="44" height="44" loading="lazy" decoding="async" />
+          <span>Sobredrones</span>
+        </div>
+        <p class="footer-about">
+          Operadora de drones certificada por AESA en Málaga, Marbella y toda la Costa del Sol.
+          Filmación y fotografía aérea con más de 10 años de experiencia.
+        </p>
+        <div class="footer-contact">
+          <a href="tel:+34635247914">+34 635 247 914</a>
+          <a href="mailto:info@sobredrones.es">info@sobredrones.es</a>
+        </div>
+        <div class="footer-social">
+          {socialLinks.map((s) => (
+            <a href={s.href} rel="noopener" target="_blank">{s.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="footer-heading">Enlaces</h2>
+        {usefulLinks.map((link) => <a class="footer-link" href={link.href}>{link.label}</a>)}
+      </div>
+
+      <div>
+        <h2 class="footer-heading">Servicios</h2>
+        {services.map((s) => <p class="footer-service">{s}</p>)}
+      </div>
+
+      <div>
+        <h2 class="footer-heading">Operadora verificada</h2>
+        <div class="footer-aesa">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7ef7f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <p>¡Operadora verificada por AESA, porque su seguridad es la nuestra!</p>
+        </div>
+        <p class="footer-area">Prestamos servicio en toda la Costa del Sol.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; Sobredrones 2025. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background-color: var(--colorNavy); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 80px 24px 0; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 44px;
+  }
+  .footer-logo { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .footer-logo img { height: 44px; width: auto; filter: brightness(0) invert(1); object-fit: contain; }
+  .footer-logo span { font-family: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif; color: #ffffff; font-size: 1.3rem; font-weight: 700; }
+  .footer-about {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px; line-height: 1.8; margin: 0 0 18px 0;
+  }
+  .footer-contact { display: flex; flex-direction: column; gap: 4px; margin-bottom: 18px; }
+  .footer-contact a { color: #ffffff; font-size: 14px; font-weight: 500; }
+  .footer-contact a:hover { color: var(--colorSky); }
+  .footer-social { display: flex; gap: 14px; flex-wrap: wrap; }
+  .footer-social a { color: rgba(255, 255, 255, 0.7); font-size: 13px; }
+  .footer-social a:hover { color: var(--colorSky); }
+  .footer-heading {
+    color: #ffffff; font-size: 1.05rem; font-weight: 700;
+    margin: 0 0 20px 0; padding-bottom: 12px;
+    border-bottom: 2px solid var(--colorMain);
+  }
+  .footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px; display: block; margin-bottom: 8px;
+    transition: color 0.2s ease-in-out, padding-left 0.2s ease-in-out;
+  }
+  .footer-link:hover { color: var(--colorSky); padding-left: 4px; }
+  .footer-service { color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0 0 8px 0; }
+  .footer-aesa { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+  .footer-aesa p { color: #ffffff; font-size: 13px; font-weight: 500; line-height: 1.5; margin: 0; }
+  .footer-area { color: rgba(255, 255, 255, 0.6); font-size: 13px; margin: 0; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 56px; padding: 24px 0; text-align: center;
+  }
+  .footer-bottom p { color: rgba(255, 255, 255, 0.5); font-size: 14px; margin: 0; }
+  @media (max-width: 991px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 575px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>

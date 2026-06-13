@@ -1,0 +1,103 @@
+---
+const features = [
+  {
+    icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
+    title: "Certificados por AESA",
+    desc: "Operadora verificada y al día con la normativa española de drones. Volamos legal y seguro.",
+  },
+  {
+    icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    title: "+10 años de experiencia",
+    desc: "Una década realizando trabajos audiovisuales con drones en Málaga y la Costa del Sol.",
+  },
+  {
+    icon: '<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    title: "Toda la Costa del Sol",
+    desc: "Damos servicio en Marbella, Málaga capital y todos los municipios de la costa.",
+  },
+  {
+    icon: '<path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>',
+    title: "Vídeo y foto en 4K",
+    desc: "Material en alta resolución listo para redes, inmobiliarias y campañas, con entrega ágil.",
+  },
+];
+---
+
+<section id="por-que-elegirnos" class="why">
+  <div class="why-inner">
+    <div class="why-intro">
+      <p class="why-eyebrow">¿Por qué elegirnos?</p>
+      <h2 class="why-title">Profesionalidad, seguridad y resultados desde el aire</h2>
+      <p class="why-lead">
+        Una operadora certificada por AESA con más de una década capturando la Costa del Sol.
+        Esto es lo que nos diferencia.
+      </p>
+      <a href="#contacto" class="btn">Pide presupuesto</a>
+    </div>
+
+    <ul class="why-list">
+      {features.map((f, i) => (
+        <li class="why-item">
+          <span class="why-index">0{i + 1}</span>
+          <span class="why-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
+          </span>
+          <div class="why-body">
+            <h3 class="why-name">{f.title}</h3>
+            <p class="why-desc">{f.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .why { background-color: var(--colorGrey); padding: 100px 0; }
+  .why-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .why-eyebrow {
+    color: var(--colorMainDark);
+    font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em;
+    font-weight: 600; margin: 0 0 14px 0;
+  }
+  .why-title {
+    font-size: 2.1rem; color: var(--colorDark); font-weight: 700;
+    line-height: 1.2; margin: 0 0 18px 0;
+  }
+  .why-lead { font-size: 16px; color: var(--colorFont); margin: 0 0 28px 0; font-weight: 300; max-width: 38ch; }
+
+  .why-list { list-style: none; margin: 0; padding: 0; }
+  .why-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: start;
+    gap: 22px;
+    padding: 26px 0;
+    border-top: 1px solid var(--colorBorder);
+  }
+  .why-item:last-child { border-bottom: 1px solid var(--colorBorder); }
+  .why-index {
+    font-size: 0.95rem; font-weight: 700; color: var(--colorSky);
+    font-variant-numeric: tabular-nums; padding-top: 4px;
+  }
+  .why-icon { color: var(--colorMain); display: flex; padding-top: 2px; }
+  .why-name { font-size: 1.15rem; font-weight: 700; color: var(--colorDark); margin: 0 0 6px 0; }
+  .why-desc { font-size: 14px; color: var(--colorFont); line-height: 1.7; margin: 0; font-weight: 300; }
+
+  @media (max-width: 900px) {
+    .why-inner { grid-template-columns: 1fr; gap: 36px; }
+    .why-title { font-size: 1.8rem; }
+  }
+  @media (max-width: 480px) {
+    .why-item { grid-template-columns: auto 1fr; }
+    .why-index { display: none; }
+  }
+</style>

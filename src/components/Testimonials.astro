@@ -1,0 +1,89 @@
+---
+// NOTA: testimonios de ejemplo (estilo realista). Antes de publicar, sustituir por
+// reseñas reales del Perfil de Empresa de Google de Sobredrones (verificables).
+const testimonials = [
+  {
+    avatar: "/images/testimonial-01.jpg",
+    name: "Lucía Ramírez",
+    role: "Agencia inmobiliaria, Marbella",
+    quote:
+      "Grabaron el vídeo aéreo de una villa y las visitas se dispararon. Profesionales, puntuales y con un acabado espectacular. Repetiremos seguro.",
+  },
+  {
+    avatar: "/images/testimonial-02.jpg",
+    name: "Javier Ortega",
+    role: "Organizador de eventos, Málaga",
+    quote:
+      "Cubrieron un festival con drones y el resultado fue increíble. Se nota que controlan la normativa y trabajan con total seguridad.",
+  },
+  {
+    avatar: "/images/testimonial-03.jpg",
+    name: "Marta Gil",
+    role: "Boda en la Costa del Sol",
+    quote:
+      "Las imágenes aéreas de nuestra boda fueron lo más comentado. Un equipo cercano que entendió perfectamente lo que buscábamos.",
+  },
+];
+---
+
+<section id="testimonios" class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h-bold">Testimonios</h2>
+      <p class="h-light">Lo que dicen nuestros clientes</p>
+    </div>
+
+    <div class="testimonials-grid">
+      {testimonials.map((t) => (
+        <figure class="testimonial-card">
+          <blockquote class="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
+          <div class="testimonial-stars" aria-label="Valoración 5 sobre 5">★★★★★</div>
+          <figcaption class="testimonial-author">
+            <span class="testimonial-avatar">
+              <img src={t.avatar} alt={t.name} width="60" height="60" loading="lazy" decoding="async" />
+            </span>
+            <span>
+              <span class="testimonial-name">{t.name}</span>
+              <span class="testimonial-role">{t.role}</span>
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials { background-color: #ffffff; padding: 100px 0; }
+  .testimonials .container { padding: 0 24px; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .testimonial-card {
+    background-color: var(--colorGrey);
+    padding: 40px 30px;
+    border-radius: 6px;
+    margin: 0;
+    transition: box-shadow 0.25s ease-in-out;
+  }
+  .testimonial-card:hover { box-shadow: 0 12px 28px -14px rgba(29, 53, 87, 0.3); }
+  .testimonial-quote {
+    font-size: 15px; color: var(--colorFont); font-style: italic;
+    line-height: 1.8; margin: 0 0 20px 0;
+  }
+  .testimonial-stars { color: var(--colorMain); margin-bottom: 16px; font-size: 18px; }
+  .testimonial-author { display: flex; align-items: center; }
+  .testimonial-avatar {
+    position: relative; width: 60px; height: 60px;
+    border-radius: 50%; overflow: hidden; flex-shrink: 0; margin-right: 16px;
+  }
+  .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testimonial-name { display: block; font-size: 1rem; font-weight: 700; color: var(--colorDark); }
+  .testimonial-role { display: block; font-size: 13px; color: var(--colorFont); }
+
+  @media (max-width: 767px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+</style>

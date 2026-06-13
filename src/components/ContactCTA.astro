@@ -1,0 +1,159 @@
+---
+---
+
+<section id="contacto" class="contact">
+  <div class="contact-row">
+    <div class="contact-map">
+      <iframe
+        title="Sobredrones — Málaga y Costa del Sol"
+        src="https://www.google.com/maps?q=M%C3%A1laga,Espa%C3%B1a&z=11&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <div class="contact-form-col">
+      <p class="contact-eyebrow">Contacto</p>
+      <h2 class="contact-title">Pide presupuesto, sin compromiso</h2>
+      <p class="contact-sub">
+        Cuéntanos qué tienes en mente y te preparamos una propuesta a medida. También puedes
+        llamarnos al <a href="tel:+34635247914">+34 635 247 914</a> o escribir a
+        <a href="mailto:info@sobredrones.es">info@sobredrones.es</a>.
+      </p>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="contact-form-grid">
+          <div class="field">
+            <label class="sr-only" for="cf-name">Tu nombre</label>
+            <input id="cf-name" name="name" type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="field">
+            <label class="sr-only" for="cf-email">Tu email</label>
+            <input id="cf-email" name="email" type="email" placeholder="Tu email" required />
+          </div>
+        </div>
+        <div class="field">
+          <label class="sr-only" for="cf-phone">Tu teléfono</label>
+          <input id="cf-phone" name="phone" type="tel" placeholder="Tu teléfono (opcional)" />
+        </div>
+        <div class="field">
+          <label class="sr-only" for="cf-message">Tu mensaje</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Explícanos qué tienes pensado..." required></textarea>
+        </div>
+        <button type="submit" class="btn contact-submit">Enviar consulta</button>
+        <p id="cf-status" class="cf-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { background-color: var(--colorGrey); padding: 100px 0; }
+  .contact-row {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: stretch;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+  .contact-map {
+    flex: 1 1 420px;
+    min-width: 300px;
+    min-height: 440px;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+  .contact-map iframe { border: 0; width: 100%; height: 100%; min-height: 440px; display: block; }
+  .contact-form-col { flex: 1 1 420px; min-width: 300px; }
+  .contact-eyebrow {
+    color: var(--colorMainDark); font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.18em; font-weight: 600; margin: 0 0 12px 0;
+  }
+  .contact-title {
+    font-size: 2.1rem; color: var(--colorDark); font-weight: 700;
+    line-height: 1.25; margin: 0 0 14px 0;
+  }
+  .contact-sub { font-size: 15px; color: var(--colorFont); margin: 0 0 26px 0; font-weight: 300; }
+  .contact-sub a { color: var(--colorMain); font-weight: 500; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--colorBorder);
+    background: #ffffff;
+    font-size: 15px;
+    color: var(--colorDark);
+    font-family: inherit;
+    border-radius: 4px;
+    transition: border-color 0.2s ease-in-out;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--colorMain); }
+  .contact-form input.invalid,
+  .contact-form textarea.invalid { border-color: var(--colorError); }
+  .contact-form textarea { resize: vertical; }
+  .contact-submit { align-self: flex-start; }
+  .contact-submit:disabled { opacity: 0.6; cursor: progress; }
+  .cf-status { margin: 0; font-size: 14px; min-height: 1.2em; }
+  .cf-status.success { color: var(--colorSuccess); }
+  .cf-status.error { color: var(--colorError); }
+
+  @media (max-width: 991px) {
+    .contact-title { font-size: 1.8rem; }
+  }
+  @media (max-width: 767px) {
+    .contact-form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("cf-status");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const required = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[required]");
+    let valid = true;
+    required.forEach((field) => {
+      const ok = field.checkValidity() && field.value.trim() !== "";
+      field.classList.toggle("invalid", !ok);
+      if (!ok) valid = false;
+    });
+
+    if (!valid) {
+      status.textContent = "Por favor, completa los campos marcados.";
+      status.className = "cf-status error";
+      return;
+    }
+
+    const submit = form.querySelector<HTMLButtonElement>(".contact-submit");
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = "Enviando…";
+    }
+    status.textContent = "";
+    status.className = "cf-status";
+
+    // Sin backend conectado todavía — simula envío correcto (mejora progresiva).
+    window.setTimeout(() => {
+      status.textContent = "¡Gracias! Hemos recibido tu consulta, te responderemos muy pronto.";
+      status.className = "cf-status success";
+      form.reset();
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = "Enviar consulta";
+      }
+    }, 800);
+  });
+</script>

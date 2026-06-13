@@ -1,0 +1,130 @@
+---
+import "../styles/globals.css";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = "/images/slide01.jpg",
+  ogType = "website",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": Astro.site?.href,
+  name: "Sobredrones",
+  description,
+  image: ogImageUrl,
+  url: Astro.site?.href,
+  telephone: "+34635247914",
+  email: "info@sobredrones.es",
+  priceRange: "€€",
+  areaServed: [
+    { "@type": "City", name: "Málaga" },
+    { "@type": "City", name: "Marbella" },
+    { "@type": "Place", name: "Costa del Sol" },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Málaga",
+    addressRegion: "Málaga",
+    addressCountry: "ES",
+  },
+  knowsAbout: [
+    "Filmación aérea con drones",
+    "Fotografía aérea",
+    "Vídeo para inmobiliarias",
+    "Espectáculos con enjambre de drones",
+    "Inspecciones con drones",
+  ],
+  sameAs: [
+    "https://www.facebook.com/sobredrones",
+    "https://www.instagram.com/sobredrones",
+    "https://www.tiktok.com/@sobredrones",
+    "https://www.youtube.com/@sobredrones",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo-sobredrones.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Sobredrones" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- LCP hero image preload (Core Web Vitals) -->
+    <link rel="preload" as="image" href="/images/slide01.webp" type="image/webp" fetchpriority="high" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Reveal on-scroll: mejora progresiva con IntersectionObserver (sin listeners de scroll).
+      const SELECTOR =
+        ".section-head, .about-text, .about-media, .why-intro, .why-item, .service-card, .hiw-step, .gallery-card, .testimonial-card, .faq-item, .brands .brand, .contact-form-col, .contact-map";
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
+
+      if (els.length && !reduce && "IntersectionObserver" in window) {
+        document.documentElement.classList.add("js-reveal");
+
+        // Stagger dentro de cada rejilla/contenedor.
+        els.forEach((el) => {
+          const siblings = Array.from(el.parentElement?.children ?? []).filter((c) =>
+            c.matches(SELECTOR)
+          );
+          const i = siblings.indexOf(el);
+          if (i > 0) el.style.transitionDelay = Math.min(i, 5) * 70 + "ms";
+        });
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

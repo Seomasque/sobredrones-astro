@@ -1,0 +1,168 @@
+---
+---
+
+<section id="inicio" class="hero">
+  <picture>
+    <source srcset="/images/slide01.webp" type="image/webp" />
+    <img
+      src="/images/slide01.jpg"
+      alt="Grabación aérea con dron sobre la costa de Málaga"
+      class="hero-img"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content-wrap">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="hero-bold animated anim-fadeIn" style="animation-delay:0.15s">Sobrevolamos</span>
+          <span class="hero-light animated anim-fadeIn" style="animation-delay:0.45s">tus proyectos</span>
+        </h1>
+        <a href="#contacto" class="hero-btn anim-pulse">
+          Pide presupuesto
+          <span aria-hidden="true" class="hero-btn-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a href="#sobre-nosotros" class="hero-scroll" aria-label="Desplázate hacia abajo">
+    <span>SCROLL</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 78dvh;
+    min-height: 560px;
+    max-height: 760px;
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(var(--colorNavyRGB), 0.72) 0%, rgba(var(--colorNavyRGB), 0.45) 60%, rgba(var(--colorNavyRGB), 0.25) 100%);
+  }
+  .hero-content-wrap { position: absolute; inset: 0; z-index: 10; }
+  .hero-content {
+    position: relative;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 720px;
+    width: 100%;
+  }
+
+  /* Línea 1: palabra en negrita dentro de un recuadro (clon del original) */
+  .hero-bold {
+    position: relative;
+    display: inline-block;
+    font-family: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 8.5vw, 5.6rem);
+    line-height: 1;
+    color: #ffffff;
+    padding: 12px 32px;
+    margin-bottom: 22px;
+  }
+  /* Borde azul animado que recorre el recuadro (clon del borde amarillo original) */
+  .hero-bold::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--hero-angle),
+      rgba(var(--colorMainRGB), 0.12),
+      var(--colorMain) 0.25turn,
+      var(--colorSky) 0.5turn,
+      var(--colorMain) 0.75turn,
+      rgba(var(--colorMainRGB), 0.12)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    animation: hero-border-spin 4s linear infinite;
+    pointer-events: none;
+  }
+  /* Línea 2: continuación en fina */
+  .hero-light {
+    display: block;
+    font-family: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5.5vw, 3.8rem);
+    line-height: 1.08;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin-bottom: 34px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    padding: 14px 36px;
+    border: 2px solid var(--colorMain);
+    background: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+  }
+  .hero-btn:hover { background: var(--colorMain); border-color: var(--colorMain); color: #ffffff; }
+  .hero-btn-arrow { font-size: 18px; line-height: 1; }
+
+  /* Indicador SCROLL (como el original), a la derecha */
+  .hero-scroll {
+    position: absolute;
+    right: 24px;
+    bottom: 36px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    writing-mode: vertical-rl;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+  }
+  .hero-scroll:hover { color: #ffffff; }
+  .hero-scroll svg { transform: rotate(0deg); }
+
+  @media (min-width: 576px) {
+    .hero-content { text-align: left; }
+    .hero-text { left: 16px; transform: translateY(-50%); }
+  }
+  @media (max-width: 767px) {
+    .hero-scroll { display: none; }
+  }
+</style>

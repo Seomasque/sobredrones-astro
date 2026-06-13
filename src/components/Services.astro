@@ -1,0 +1,104 @@
+---
+const services = [
+  {
+    image: "/images/gallery-01.jpg",
+    name: "Filmación Aérea",
+    desc: "Grabación de eventos, proyectos para particulares y documentación gráfica para empresas en vídeo 4K.",
+  },
+  {
+    image: "/images/gallery-02.jpg",
+    name: "Fotografía Aérea",
+    desc: "Imágenes aéreas impresionantes para eventos, promociones y proyectos, destacando la belleza desde el cielo.",
+  },
+  {
+    image: "/images/gallery-03.jpg",
+    name: "Inmobiliarias",
+    desc: "Vídeo y fotografía aérea para promocionar viviendas en redes sociales, portales y presentaciones a clientes.",
+  },
+  {
+    image: "/images/gallery-04.jpg",
+    name: "Eventos y Bodas",
+    desc: "Cobertura aérea de bodas, conciertos y festivales: planos imposibles que valoran parejas y organizadores.",
+  },
+  {
+    image: "/images/gallery-05.jpg",
+    name: "Espectáculos con Enjambre de Drones",
+    desc: "Shows aéreos con enjambre de drones para eventos y marcas en Marbella y la Costa del Sol.",
+  },
+  {
+    image: "/images/gallery-06.jpg",
+    name: "Inspecciones y Renders",
+    desc: "Inspección técnica y material visual de alta calidad para infraestructuras y proyectos de obra.",
+  },
+];
+---
+
+<section id="servicios" class="services">
+  <div class="container">
+    <div class="services-head">
+      <p class="services-eyebrow">Servicios</p>
+      <h2 class="services-title">Servicios de drones para inmobiliarias, eventos y empresas</h2>
+      <p class="services-intro">
+        Ofrecemos soluciones innovadoras con drones para todo tipo de proyectos, garantizando
+        calidad y profesionalidad en cada trabajo.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s) => (
+        <article class="service-card">
+          <div class="service-media">
+            <picture>
+              <source srcset={s.image.replace(/\.(jpe?g|png)$/, ".webp")} type="image/webp" />
+              <img src={s.image} alt={`${s.name} con drones en Málaga`} loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <div class="service-body">
+            <h3 class="service-name">{s.name}</h3>
+            <p class="service-desc">{s.desc}</p>
+            <a href="#contacto" class="service-link">Pedir presupuesto <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services { background: var(--colorGrey); padding: 100px 0; }
+  .services .container { padding: 0 24px; }
+  .services-head { text-align: left; margin-bottom: 48px; max-width: 760px; }
+  .services-eyebrow {
+    color: var(--colorMainDark); font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.18em; font-weight: 600; margin: 0 0 12px 0;
+  }
+  .services-title { font-size: 2.2rem; color: var(--colorDark); font-weight: 700; margin: 0 0 16px 0; line-height: 1.25; }
+  .services-intro { font-size: 16px; color: var(--colorFont); margin: 0; font-weight: 300; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .service-card:hover { box-shadow: 0 14px 30px -14px rgba(29, 53, 87, 0.4); transform: translateY(-3px); }
+  .service-media { aspect-ratio: 3 / 2; overflow: hidden; }
+  .service-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+  .service-card:hover .service-media img { transform: scale(1.05); }
+  .service-body { padding: 24px; }
+  .service-name { font-size: 1.2rem; font-weight: 700; color: var(--colorDark); margin: 0 0 10px 0; }
+  .service-desc { font-size: 14px; color: var(--colorFont); line-height: 1.7; margin: 0 0 16px 0; font-weight: 300; }
+  .service-link { font-size: 14px; font-weight: 600; color: var(--colorMain); display: inline-flex; gap: 6px; }
+  .service-link:hover { color: var(--colorMainDark); gap: 10px; transition: gap 0.2s; }
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .services-title { font-size: 1.8rem; }
+  }
+</style>
