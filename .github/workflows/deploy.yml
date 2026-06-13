@@ -1,0 +1,49 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 51.170.47.116 >> ~/.ssh/known_hosts
+
+      - name: Upload dist to VPS
+        run: |
+          tar -czf /tmp/sd-dist.tar.gz -C dist .
+          scp -i ~/.ssh/deploy_key /tmp/sd-dist.tar.gz ${{ secrets.SSH_HOST }}:/tmp/sd-dist.tar.gz
+
+      - name: Deploy on VPS
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_HOST }} \
+            "sudo rm -rf /var/www/sobredrones/* && \
+             sudo tar -xzf /tmp/sd-dist.tar.gz -C /var/www/sobredrones && \
+             sudo chown -R root:root /var/www/sobredrones && \
+             rm -f /tmp/sd-dist.tar.gz"
+
+      - name: Verify
+        run: |
+          CODE=$(curl -sk -o /dev/null -w '%{http_code}' --max-time 20 https://sobredrones.51.170.47.116.sslip.io || echo '000')
+          echo "HTTP $CODE"
+          [ "$CODE" = "200" ] && echo "OK: deployed" || echo "WARNING: got $CODE"
