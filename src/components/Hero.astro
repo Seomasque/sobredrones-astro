@@ -52,7 +52,8 @@
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(var(--colorNavyRGB), 0.72) 0%, rgba(var(--colorNavyRGB), 0.45) 60%, rgba(var(--colorNavyRGB), 0.25) 100%);
+    /* Degradado sutil: comienza más intenso en la esquina superior izquierda, se vuelve transparente hacia la mitad/derecha */
+    background: radial-gradient(100% 120% at 0% 0%, rgba(var(--colorNavyRGB), 0.75) 0%, rgba(var(--colorNavyRGB), 0.3) 40%, rgba(var(--colorNavyRGB), 0) 70%);
   }
   .hero-content-wrap { position: absolute; inset: 0; z-index: 10; }
   .hero-content {
