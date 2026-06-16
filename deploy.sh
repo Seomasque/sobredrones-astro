@@ -8,7 +8,7 @@ set -euo pipefail
 SSH_KEY="${SSH_KEY:-/mnt/c/Users/jmedi/.ssh/sobredrones.key}"
 REMOTE="${REMOTE:-ubuntu@51.170.47.116}"
 TARGET="${TARGET:-/var/www/sobredrones}"
-URL="${URL:-https://sobredrones.51.170.47.116.sslip.io}"
+URL="${URL:-https://sobredrones.es}"
 
 # Ejecuta siempre desde la carpeta del script.
 cd "$(dirname "$0")"
