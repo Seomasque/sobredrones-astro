@@ -5,7 +5,7 @@
 set -euo pipefail
 
 # --- Config ---
-SSH_KEY="${SSH_KEY:-/c/sobredrones/sobredrones ssh-key-2026-06-04.key}"
+SSH_KEY="${SSH_KEY:-/mnt/c/Users/jmedi/.ssh/sobredrones.key}"
 REMOTE="${REMOTE:-ubuntu@51.170.47.116}"
 TARGET="${TARGET:-/var/www/sobredrones}"
 URL="${URL:-https://sobredrones.51.170.47.116.sslip.io}"

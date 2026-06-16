@@ -166,15 +166,32 @@
     status.textContent = "";
     status.className = "cf-status";
 
-    // Sin backend conectado todavía — simula envío correcto (mejora progresiva).
-    window.setTimeout(() => {
+    const formData = new FormData(form);
+    formData.append("access_key", "08efad85-884b-49db-b15b-ee5020de75d3"); 
+    formData.append("subject", "Nuevo mensaje desde la web de Sobredrones");
+    formData.append("from_name", "Web Sobredrones");
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    })
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error('Error en el envío');
+      }
       status.textContent = "¡Gracias! Hemos recibido tu consulta, te responderemos muy pronto.";
       status.className = "cf-status success";
       form.reset();
+    })
+    .catch((error) => {
+      status.textContent = "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o escríbenos directamente a info@sobredrones.es.";
+      status.className = "cf-status error";
+    })
+    .finally(() => {
       if (submit) {
         submit.disabled = false;
         submit.textContent = "Enviar consulta";
       }
-    }, 800);
+    });
   });
 </script>
