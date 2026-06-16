@@ -1,27 +1,33 @@
 ---
-// NOTA: testimonios de ejemplo (estilo realista). Antes de publicar, sustituir por
-// reseñas reales del Perfil de Empresa de Google de Sobredrones (verificables).
+// Reseñas reales del Perfil de Empresa de Google de Sobredrones.
 const testimonials = [
   {
-    avatar: "/images/testimonial-01.jpg",
-    name: "Lucía Ramírez",
-    role: "Agencia inmobiliaria, Marbella",
+    name: "Carmen Fraile",
+    role: "4 reseñas en Google",
     quote:
-      "Grabaron el vídeo aéreo de una villa y las visitas se dispararon. Profesionales, puntuales y con un acabado espectacular. Repetiremos seguro.",
+      "Excelente y con mucha profesionalidad. Un trato personalizado desde el primer momento hasta el final. Una experiencia muy grata.",
   },
   {
-    avatar: "/images/testimonial-02.jpg",
-    name: "Javier Ortega",
-    role: "Organizador de eventos, Málaga",
-    quote:
-      "Cubrieron un festival con drones y el resultado fue increíble. Se nota que controlan la normativa y trabajan con total seguridad.",
+    name: "Carlos Esteban Martínez",
+    role: "5 reseñas en Google",
+    quote: "Grandes profesionales, quedó un vídeo genial.",
   },
   {
-    avatar: "/images/testimonial-03.jpg",
-    name: "Marta Gil",
-    role: "Boda en la Costa del Sol",
+    name: "Christian Thone",
+    role: "Local Guide · 25 reseñas en Google",
     quote:
-      "Las imágenes aéreas de nuestra boda fueron lo más comentado. Un equipo cercano que entendió perfectamente lo que buscábamos.",
+      "Muy contento con los resultados, necesitaba unas tomas y superó mis expectativas! Gran piloto y súper puesto en todo lo relacionado con pilotaje de drones. La Wikipedia de drones!",
+  },
+  {
+    name: "Eduardo Nieto",
+    role: "2 reseñas en Google",
+    quote: "Excelente profesional, perfecto en ejecución y resultados. Recomendable 120%.",
+  },
+  {
+    name: "SEO masqueseo",
+    role: "2 reseñas en Google",
+    quote:
+      "Buscaba la mejor empresa de drones en Marbella para un vídeo corporativo y el resultado ha sido espectacular. La calidad de la fotografía aérea y los planos en 4K son de otro nivel. Si buscas un piloto de drones profesional que cumpla con toda la normativa y sea puntual, los recomiendo al 100%. ¡Muy buena relación calidad-precio!",
   },
 ];
 ---
@@ -39,9 +45,7 @@ const testimonials = [
           <blockquote class="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
           <div class="testimonial-stars" aria-label="Valoración 5 sobre 5">★★★★★</div>
           <figcaption class="testimonial-author">
-            <span class="testimonial-avatar">
-              <img src={t.avatar} alt={t.name} width="60" height="60" loading="lazy" decoding="async" />
-            </span>
+            <span class="testimonial-avatar" aria-hidden="true">{t.name.charAt(0)}</span>
             <span>
               <span class="testimonial-name">{t.name}</span>
               <span class="testimonial-role">{t.role}</span>
@@ -76,10 +80,10 @@ const testimonials = [
   .testimonial-stars { color: var(--colorMain); margin-bottom: 16px; font-size: 18px; }
   .testimonial-author { display: flex; align-items: center; }
   .testimonial-avatar {
-    position: relative; width: 60px; height: 60px;
-    border-radius: 50%; overflow: hidden; flex-shrink: 0; margin-right: 16px;
+    display: flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; margin-right: 16px;
+    background: var(--colorMain); color: #fff; font-size: 1.3rem; font-weight: 700;
   }
-  .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
   .testimonial-name { display: block; font-size: 1rem; font-weight: 700; color: var(--colorDark); }
   .testimonial-role { display: block; font-size: 13px; color: var(--colorFont); }
 
