@@ -33,20 +33,32 @@ const testimonials = [
       <p class="h-light">Lo que dicen nuestros clientes</p>
     </div>
 
-    <div class="testimonials-grid">
-      {testimonials.map((t) => (
-        <figure class="testimonial-card">
-          <blockquote class="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
-          <div class="testimonial-stars" aria-label="Valoración 5 sobre 5">★★★★★</div>
-          <figcaption class="testimonial-author">
-            <span class="testimonial-avatar" aria-hidden="true">{t.name.charAt(0)}</span>
-            <span>
-              <span class="testimonial-name">{t.name}</span>
-              <span class="testimonial-role">{t.role}</span>
-            </span>
-          </figcaption>
-        </figure>
-      ))}
+    <div class="tcar" data-tcar>
+      <button class="tcar-arrow tcar-prev" type="button" data-tcar-prev aria-label="Testimonio anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <ul class="tcar-track" data-tcar-track>
+        {testimonials.map((t) => (
+          <li class="testimonial-card">
+            <blockquote class="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
+            <div class="testimonial-stars" aria-label="Valoración 5 sobre 5">★★★★★</div>
+            <div class="testimonial-author">
+              <span class="testimonial-avatar" aria-hidden="true">{t.name.charAt(0)}</span>
+              <span>
+                <span class="testimonial-name">{t.name}</span>
+                <span class="testimonial-role">{t.role}</span>
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <button class="tcar-arrow tcar-next" type="button" data-tcar-next aria-label="Testimonio siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="tcar-dots" data-tcar-dots></div>
     </div>
   </div>
 </section>
@@ -54,19 +66,34 @@ const testimonials = [
 <style>
   .testimonials { background-color: #ffffff; padding: 100px 0; }
   .testimonials .container { padding: 0 24px; }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+  /* Carrusel */
+  .tcar { position: relative; }
+  .tcar-track {
+    display: flex;
     gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 6px 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .tcar-track::-webkit-scrollbar { display: none; }
+
   .testimonial-card {
+    scroll-snap-align: start;
+    flex: 0 0 calc((100% - 60px) / 3); /* 3 por vista en escritorio */
     background-color: var(--colorGrey);
     padding: 40px 30px;
     border-radius: 6px;
-    margin: 0;
-    transition: box-shadow 0.25s ease-in-out;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .testimonial-card:hover { box-shadow: 0 12px 28px -14px rgba(29, 53, 87, 0.3); }
+  .testimonial-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
   .testimonial-quote {
     font-size: 15px; color: var(--colorFont); font-style: italic;
     line-height: 1.8; margin: 0 0 20px 0;
@@ -81,7 +108,163 @@ const testimonials = [
   .testimonial-name { display: block; font-size: 1rem; font-weight: 700; color: var(--colorDark); }
   .testimonial-role { display: block; font-size: 13px; color: var(--colorFont); }
 
+  /* Flechas */
+  .tcar-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--colorBorder);
+    background: #fff;
+    color: var(--colorMain);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tcar-arrow:hover { background: var(--colorMain); color: #fff; box-shadow: var(--shadow-md); }
+  .tcar-arrow svg { width: 20px; height: 20px; }
+  .tcar-prev { left: -8px; }
+  .tcar-next { right: -8px; }
+
+  /* Puntos */
+  .tcar-dots { display: flex; justify-content: center; gap: 8px; margin-top: 30px; min-height: 8px; }
+  .tcar-dot {
+    width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%;
+    background: var(--colorBorder); cursor: pointer;
+    transition: background 0.25s ease, width 0.25s ease;
+  }
+  .tcar-dot.is-active { background: var(--colorMain); width: 24px; border-radius: 4px; }
+
+  @media (max-width: 991px) {
+    .testimonial-card { flex-basis: calc((100% - 30px) / 2); } /* 2 por vista */
+  }
   @media (max-width: 767px) {
-    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial-card { flex-basis: 100%; }                    /* 1 por vista */
+    .tcar-prev { left: 2px; }
+    .tcar-next { right: 2px; }
+    .tcar-arrow { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(2px); }
+  }
+
+  /* Sin carrusel JS: degradado elegante a una rejilla normal */
+  .tcar:not([data-ready]) .tcar-arrow,
+  .tcar:not([data-ready]) .tcar-dots { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tcar-track { scroll-behavior: auto; }
   }
 </style>
+
+<script>
+  type Car = {
+    root: HTMLElement;
+    track: HTMLElement;
+    cards: HTMLElement[];
+    dots: HTMLElement;
+    timer: number | null;
+  };
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function step(c: Car): number {
+    if (c.cards.length < 2) return c.cards[0]?.offsetWidth ?? 0;
+    return c.cards[1].offsetLeft - c.cards[0].offsetLeft;
+  }
+
+  function pages(c: Car): number {
+    const s = step(c);
+    if (!s) return 1;
+    const max = c.track.scrollWidth - c.track.clientWidth;
+    return Math.max(1, Math.round(max / s) + 1);
+  }
+
+  function current(c: Car): number {
+    const s = step(c);
+    return s ? Math.round(c.track.scrollLeft / s) : 0;
+  }
+
+  function goTo(c: Car, i: number) {
+    const s = step(c);
+    const n = pages(c);
+    const idx = ((i % n) + n) % n;
+    c.track.scrollTo({ left: idx * s, behavior: reduce ? "auto" : "smooth" });
+  }
+
+  function buildDots(c: Car) {
+    const n = pages(c);
+    c.dots.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "tcar-dot";
+      b.setAttribute("aria-label", `Ir al testimonio ${i + 1}`);
+      b.addEventListener("click", () => goTo(c, i));
+      c.dots.appendChild(b);
+    }
+    syncDots(c);
+  }
+
+  function syncDots(c: Car) {
+    const active = current(c);
+    Array.from(c.dots.children).forEach((d, i) =>
+      d.classList.toggle("is-active", i === active)
+    );
+  }
+
+  function start(c: Car) {
+    if (reduce || c.timer !== null) return;
+    c.timer = window.setInterval(() => goTo(c, current(c) + 1), 5000);
+  }
+  function stop(c: Car) {
+    if (c.timer !== null) {
+      clearInterval(c.timer);
+      c.timer = null;
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-tcar]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-tcar-track]");
+    const dots = root.querySelector<HTMLElement>("[data-tcar-dots]");
+    if (!track || !dots) return;
+    const cards = Array.from(track.querySelectorAll<HTMLElement>(".testimonial-card"));
+    if (cards.length < 2) return;
+
+    const c: Car = { root, track, cards, dots, timer: null };
+    root.setAttribute("data-ready", "");
+
+    root.querySelector("[data-tcar-prev]")?.addEventListener("click", () =>
+      goTo(c, current(c) - 1)
+    );
+    root.querySelector("[data-tcar-next]")?.addEventListener("click", () =>
+      goTo(c, current(c) + 1)
+    );
+
+    let raf = 0;
+    track.addEventListener("scroll", () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => syncDots(c));
+    });
+
+    // Pausa al interactuar / pestaña oculta
+    ["mouseenter", "focusin", "touchstart"].forEach((e) =>
+      root.addEventListener(e, () => stop(c), { passive: true })
+    );
+    ["mouseleave", "focusout"].forEach((e) =>
+      root.addEventListener(e, () => start(c))
+    );
+    document.addEventListener("visibilitychange", () =>
+      document.hidden ? stop(c) : start(c)
+    );
+
+    let rt = 0;
+    window.addEventListener("resize", () => {
+      clearTimeout(rt);
+      rt = window.setTimeout(() => buildDots(c), 150);
+    });
+
+    buildDots(c);
+    start(c);
+  });
+</script>

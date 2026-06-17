@@ -92,7 +92,7 @@
     display: block;
     font-family: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
     font-weight: 800;
-    font-size: clamp(2.5rem, 5vw, 3.6rem);
+    font-size: var(--fs-h2-lg);
     line-height: 1.05;
     color: var(--colorDark);
   }
@@ -106,16 +106,19 @@
     color: var(--colorDark);
   }
 
-  /* Párrafos con raya vertical azul (clon del acento original) */
   .about-copy { margin-bottom: 28px; max-width: 480px; }
   .about-body {
     font-size: 16px;
     color: var(--colorFont);
     line-height: 1.8;
     font-weight: 300;
-    border-left: 3px solid var(--colorMain);
-    padding-left: 22px;
-    margin: 0 0 22px 0;
+    margin: 0 0 18px 0;
+  }
+  /* Primer párrafo como entradilla: algo mayor y más oscuro, sin raya lateral */
+  .about-body:first-child {
+    font-size: 17px;
+    color: var(--colorDark);
+    font-weight: 400;
   }
   .about-body:last-child { margin-bottom: 0; }
 
