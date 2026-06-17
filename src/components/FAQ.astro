@@ -92,4 +92,13 @@ const faqSchema = {
     line-height: 1.8;
     font-weight: 300;
   }
+  .faq-item summary { transition: color 0.2s ease; }
+  .faq-item[open] summary { color: var(--colorMain); }
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-item[open] .faq-answer { animation: faq-reveal 0.32s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes faq-reveal {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
 </style>

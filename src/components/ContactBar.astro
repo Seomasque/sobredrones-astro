@@ -77,6 +77,11 @@ const items = [
     background-color: rgba(var(--colorMainRGB), 0.18);
     border: 1px solid rgba(168, 218, 220, 0.35);
     display: flex; align-items: center; justify-content: center;
+    transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .contact-item:hover .contact-icon {
+    background-color: rgba(var(--colorMainRGB), 0.32);
+    transform: scale(1.08);
   }
   .contact-label {
     font-size: 12px;

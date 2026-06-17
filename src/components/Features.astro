@@ -115,7 +115,8 @@ const features = [
     font-size: 0.95rem; font-weight: 700; color: var(--colorSky);
     font-variant-numeric: tabular-nums; padding-top: 4px;
   }
-  .why-icon { color: var(--colorMain); display: flex; padding-top: 2px; }
+  .why-icon { color: var(--colorMain); display: flex; padding-top: 2px; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+  .why-item:hover .why-icon { transform: scale(1.12); }
   .why-name { font-size: 1.15rem; font-weight: 700; color: var(--colorDark); margin: 0 0 6px 0; }
   .why-desc { font-size: 14px; color: var(--colorFont); line-height: 1.7; margin: 0; font-weight: 300; }
 
