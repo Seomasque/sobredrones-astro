@@ -184,23 +184,12 @@ picture { display: contents; }
 .anim-pulse { animation: sd-pulse 1.6s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 2s ease infinite; }
 
-/* Borde animado del título del hero (recorre el rectángulo) */
-@property --hero-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes hero-border-spin {
-  to { --hero-angle: 360deg; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .animated,
   .anim-fadeIn,
   .anim-pulse,
-  .animate-pulse-ring,
-  .hero-bold::before {
+  .animate-pulse-ring {
     animation: none !important;
   }
 }
