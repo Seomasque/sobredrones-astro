@@ -1,6 +1,6 @@
 ---
 const items = [
-  { video: "/images/ours/trabajos/grabacion-costa.webm", title: "Grabación de costa", category: "Filmación" },
+  { video: "/images/ours/trabajos/grabacion-costa.mp4", poster: "/images/ours/trabajos/grabacion-costa-poster.jpg", title: "Grabación de costa", category: "Filmación" },
   { image: "/images/ours/trabajos/vista-aerea-urbana.webp", title: "Vista aérea urbana", category: "Fotografía" },
   { image: "/images/ours/trabajos/proyecto-inmobiliario.webp", title: "Proyecto inmobiliario", category: "Inmobiliaria" },
 ];
@@ -17,7 +17,7 @@ const items = [
       {items.map((item) => (
         <div class="gallery-card">
           {item.video ? (
-            <video src={item.video} autoplay loop muted playsinline preload="metadata" aria-label={item.title}></video>
+            <video class="gallery-video" data-src={item.video} poster={item.poster} loop muted playsinline preload="none" aria-label={item.title}></video>
           ) : (
             <picture>
               <source srcset={item.image.replace(/\.(jpe?g|png)$/, ".webp")} type="image/webp" />
@@ -85,3 +85,35 @@ const items = [
     .gallery-grid { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  // Carga y reproduce los vídeos de la galería solo cuando entran en el viewport.
+  // Evita descargar el clip (y saturar la red) en la carga inicial.
+  const vids = document.querySelectorAll<HTMLVideoElement>("video.gallery-video[data-src]");
+  if (vids.length) {
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const v = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) {
+              if (!v.src && v.dataset.src) v.src = v.dataset.src;
+              v.play().catch(() => {});
+            } else {
+              v.pause();
+            }
+          });
+        },
+        { rootMargin: "200px 0px" }
+      );
+      vids.forEach((v) => io.observe(v));
+    } else {
+      vids.forEach((v) => {
+        if (v.dataset.src) {
+          v.src = v.dataset.src;
+          v.play().catch(() => {});
+        }
+      });
+    }
+  }
+</script>

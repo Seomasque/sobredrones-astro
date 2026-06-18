@@ -29,6 +29,8 @@
 - ¿Dónde trabaja? En toda la Costa del Sol, incluyendo Málaga capital y Marbella.
 
 ## Enlaces
-- Web: https://sobredrones.es
-- Contacto: https://sobredrones.es/#contacto
-- Servicios: https://sobredrones.es/#servicios
+- [Web de Sobredrones](https://sobredrones.es)
+- [Servicios de drones](https://sobredrones.es/#servicios)
+- [Galería de trabajos](https://sobredrones.es/#galeria)
+- [Preguntas frecuentes](https://sobredrones.es/#faq)
+- [Contacto y presupuesto](https://sobredrones.es/#contacto)
