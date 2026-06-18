@@ -11,18 +11,6 @@
     fetchpriority="high"
     decoding="sync"
   />
-  <video
-    class="hero-vid"
-    width="1920"
-    height="1080"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="none"
-    aria-label="Vídeo de fondo con tomas aéreas de drones en la Costa del Sol"
-    data-src="/images/hero/hero.mp4"
-  ></video>
   <div class="hero-overlay"></div>
 
   <div class="hero-content-wrap">
@@ -55,22 +43,13 @@
     max-height: 760px;
     overflow: hidden;
   }
-  .hero-poster,
-  .hero-vid {
+  .hero-poster {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .hero-vid {
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-  }
-  /* El vídeo aparece solo cuando empieza a reproducirse, para no ocluir el
-     póster (que es el elemento LCP) durante la carga inicial. */
-  .hero-vid.is-playing { opacity: 1; }
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -190,26 +169,3 @@
     .hero-scroll { display: none; }
   }
 </style>
-
-<script>
-  // Carga diferida del vídeo del hero: arranca después del LCP para no competir
-  // por ancho de banda con la pintura inicial. Hasta entonces se ve el póster.
-  const v = document.querySelector<HTMLVideoElement>("video.hero-vid");
-  const src = v?.dataset.src;
-  if (v && src) {
-    const load = () => {
-      const c = (navigator as any).connection;
-      // En ahorro de datos o conexiones 2G dejamos solo el póster.
-      if (c && (c.saveData || /2g/.test(c.effectiveType || ""))) return;
-      v.addEventListener("playing", () => v.classList.add("is-playing"), { once: true });
-      v.src = src;
-      v.load();
-    };
-    const schedule = () =>
-      "requestIdleCallback" in window
-        ? requestIdleCallback(load, { timeout: 2000 })
-        : setTimeout(load, 300);
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
-  }
-</script>
