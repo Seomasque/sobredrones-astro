@@ -83,8 +83,9 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- LCP hero image preload (Core Web Vitals) -->
+    <!-- LCP hero poster preload (Core Web Vitals) -->
     <link rel="preload" as="image" href="/images/slide01.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="video" href="/images/hero/hero.mp4" type="video/mp4" />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
