@@ -11,7 +11,6 @@
     fetchpriority="high"
     decoding="sync"
   />
-  <div class="hero-overlay"></div>
 
   <div class="hero-content-wrap">
     <div class="hero-content">
@@ -50,18 +49,6 @@
     height: 100%;
     object-fit: cover;
   }
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(
-      135deg,
-      rgba(var(--colorNavyRGB), 0.62) 0%,
-      rgba(var(--colorNavyRGB), 0.52) 35%,
-      rgba(var(--colorNavyRGB), 0.40) 65%,
-      rgba(var(--colorNavyRGB), 0.26) 100%
-    );
-  }
   .hero-content-wrap { position: absolute; inset: 0; z-index: 10; }
   .hero-content {
     position: relative;
@@ -91,6 +78,7 @@
     color: #ffffff;
     padding: 12px 32px;
     margin-bottom: 22px;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.45);
   }
   /* Borde azul animado que recorre el recuadro (clon del borde amarillo original) */
   .hero-bold::before {
@@ -122,6 +110,7 @@
     color: #ffffff;
     letter-spacing: -0.01em;
     margin-bottom: 34px;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.45);
   }
 
   .hero-btn {
