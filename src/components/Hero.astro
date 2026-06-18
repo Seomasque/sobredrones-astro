@@ -2,16 +2,22 @@
 ---
 
 <section id="inicio" class="hero">
+  <img
+    class="hero-poster"
+    src="/images/slide01.webp"
+    alt="Vista aérea de la Costa del Sol filmada con dron por Sobredrones"
+    width="1920"
+    height="1080"
+    fetchpriority="high"
+    decoding="sync"
+  />
   <video
-    class="hero-img"
+    class="hero-vid"
     src="/images/hero/hero.mp4"
-    poster="/images/slide01.webp"
     autoplay
     muted
     loop
     playsinline
-    width="1920"
-    height="1080"
   ></video>
   <div class="hero-overlay"></div>
 
@@ -45,16 +51,21 @@
     max-height: 760px;
     overflow: hidden;
   }
-  .hero-img {
+  .hero-poster,
+  .hero-vid {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  .hero-vid {
+    z-index: 1;
+  }
   .hero-overlay {
     position: absolute;
     inset: 0;
+    z-index: 2;
     background: linear-gradient(
       135deg,
       rgba(var(--colorNavyRGB), 0.62) 0%,

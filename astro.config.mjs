@@ -8,7 +8,7 @@ export default defineConfig({
   trailingSlash: 'never',
   build: {
     format: 'directory',
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   prefetch: false,
 });
