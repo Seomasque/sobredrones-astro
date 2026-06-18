@@ -13,11 +13,14 @@
   />
   <video
     class="hero-vid"
-    src="/images/hero/hero.mp4"
+    width="1920"
+    height="1080"
     autoplay
     muted
     loop
     playsinline
+    preload="none"
+    data-src="/images/hero/hero.mp4"
   ></video>
   <div class="hero-overlay"></div>
 
@@ -182,3 +185,25 @@
     .hero-scroll { display: none; }
   }
 </style>
+
+<script>
+  // Carga diferida del vídeo del hero: arranca después del LCP para no competir
+  // por ancho de banda con la pintura inicial. Hasta entonces se ve el póster.
+  const v = document.querySelector<HTMLVideoElement>("video.hero-vid");
+  const src = v?.dataset.src;
+  if (v && src) {
+    const load = () => {
+      const c = (navigator as any).connection;
+      // En ahorro de datos o conexiones 2G dejamos solo el póster.
+      if (c && (c.saveData || /2g/.test(c.effectiveType || ""))) return;
+      v.src = src;
+      v.load();
+    };
+    const schedule = () =>
+      "requestIdleCallback" in window
+        ? requestIdleCallback(load, { timeout: 2000 })
+        : setTimeout(load, 300);
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+  }
+</script>
