@@ -109,7 +109,8 @@ const structuredData = {
       const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
 
       if (els.length && !reduce && "IntersectionObserver" in window) {
-        document.documentElement.classList.add("js-reveal");
+        // TEST NO_LCP: desactivado temporalmente el ocultado por reveal.
+        // document.documentElement.classList.add("js-reveal");
 
         // Stagger dentro de cada rejilla/contenedor.
         els.forEach((el) => {
