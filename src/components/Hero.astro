@@ -20,6 +20,7 @@
     loop
     playsinline
     preload="none"
+    aria-label="Vídeo de fondo con tomas aéreas de drones en la Costa del Sol"
     data-src="/images/hero/hero.mp4"
   ></video>
   <div class="hero-overlay"></div>
@@ -64,7 +65,12 @@
   }
   .hero-vid {
     z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease;
   }
+  /* El vídeo aparece solo cuando empieza a reproducirse, para no ocluir el
+     póster (que es el elemento LCP) durante la carga inicial. */
+  .hero-vid.is-playing { opacity: 1; }
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -195,6 +201,7 @@
       const c = (navigator as any).connection;
       // En ahorro de datos o conexiones 2G dejamos solo el póster.
       if (c && (c.saveData || /2g/.test(c.effectiveType || ""))) return;
+      v.addEventListener("playing", () => v.classList.add("is-playing"), { once: true });
       v.src = src;
       v.load();
     };

@@ -83,9 +83,11 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Preconnect: orígenes externos usados en la página -->
-    <link rel="preconnect" href="https://www.google.com" crossorigin />
-    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <!-- dns-prefetch: orígenes que se usan más tarde (mapa, envío de formulario),
+         no en la carga inicial. Evita abrir sockets TLS que Lighthouse marca como
+         "preconnect sin usar". -->
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
 
     <!-- Font preloads (las dos latin, que cubren el 99% del texto) -->
     <link rel="preload" as="font" href="/_astro/hanken-grotesk-latin-wght-normal.CaVRRdDk.woff2" type="font/woff2" crossorigin />
