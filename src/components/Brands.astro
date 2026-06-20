@@ -8,10 +8,11 @@ const brands = [
 ---
 
 <section class="brands">
-  <div class="container">
-    <p class="brands-heading">Confían en nosotros</p>
-    <div class="brands-grid">
-      {brands.map((b) => (
+  <p class="brands-heading">Confían en nosotros</p>
+  <div class="marquee" aria-label="Logos de clientes">
+    <div class="marquee-track">
+      {/* Render twice for seamless loop */}
+      {[...brands, ...brands].map((b) => (
         <div class="brand">
           <img
             src={b.src}
@@ -31,11 +32,11 @@ const brands = [
 <style>
   .brands {
     background-color: #ffffff;
-    padding: 56px 0;
+    padding: 48px 0;
     border-top: 1px solid var(--colorBorder);
     border-bottom: 1px solid var(--colorBorder);
+    overflow: hidden;
   }
-  .brands .container { padding: 0 24px; }
   .brands-heading {
     text-align: center;
     color: var(--colorFont);
@@ -44,46 +45,84 @@ const brands = [
     letter-spacing: 0.18em;
     font-weight: 600;
     margin: 0 0 32px 0;
+    padding: 0 24px;
   }
-  .brands-grid {
+
+  .marquee {
+    position: relative;
+    width: 100%;
+    /* Fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
+  .marquee-track {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    gap: 40px 56px;
-    max-width: 900px;
-    margin: 0 auto;
+    gap: 64px;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
   }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   .brand {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 4px 8px;
   }
   .brand img {
-    height: 60px;
+    height: 55px;
     width: auto;
     max-width: 160px;
     object-fit: contain;
     filter: grayscale(1);
-    opacity: 0.55;
+    opacity: 0.5;
     transition: filter 0.3s ease, opacity 0.3s ease;
   }
   .brand img:hover {
     filter: grayscale(0);
     opacity: 1;
   }
-  /* White-on-transparent logos: darken so they're visible on white bg */
   .brand img.invert-logo {
     filter: grayscale(1) brightness(0);
-    opacity: 0.55;
+    opacity: 0.5;
   }
   .brand img.invert-logo:hover {
     filter: brightness(0);
-    opacity: 0.8;
+    opacity: 0.75;
   }
+
+  /* Pause on hover for accessibility */
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px 48px;
+      width: auto;
+      padding: 0 24px;
+    }
+    /* Hide duplicates when not animating */
+    .brand:nth-child(n+5) { display: none; }
+    .marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
   @media (max-width: 639px) {
-    .brands-grid { gap: 32px 40px; }
-    .brand img { height: 48px; max-width: 130px; }
+    .brand img { height: 42px; max-width: 120px; }
+    .marquee-track { gap: 48px; }
   }
 </style>
