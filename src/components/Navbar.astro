@@ -10,7 +10,7 @@ const navItems = [
 <header id="site-header" class="site-header">
   <div class="nav-inner">
     <a href="#inicio" class="brand" aria-label="Sobredrones — inicio">
-      <img src="/images/logo-sobredrones.png" alt="Sobredrones — operadora de drones en Málaga" width="44" height="44" class="brand-mark" />
+      <img src="/images/logo-sobredrones.webp" alt="Sobredrones — operadora de drones en Málaga" width="44" height="44" class="brand-mark" />
       <span class="brand-name">Sobredrones</span>
     </a>
 
@@ -61,7 +61,8 @@ const navItems = [
   }
   .site-header.scrolled .nav-inner { height: 70px; }
   .brand { display: flex; align-items: center; gap: 10px; }
-  .brand-mark { height: 44px; width: auto; }
+  .brand-mark { height: 44px; width: auto; transition: filter 0.3s ease; }
+  .site-header:not(.scrolled) .brand-mark { filter: brightness(0) invert(1); }
   .brand-name {
     font-family: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
     font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
